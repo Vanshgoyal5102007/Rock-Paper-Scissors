@@ -4,13 +4,16 @@ function getRandomNumber(min, max){
 
 function getComputerChoice(){
     const randomNum = getRandomNumber(1,3);
-    let choiceComp;
     switch (randomNum){
         case 1:
-            return "Rock"
+            return "rock"
         case 2:
-            return "Paper"
+            return "paper"
         case 3:
-            return "Scissors";
+            return "scissors";
     }
+}
+
+function getHumanChoice(){
+    return prompt(`Enter "Rock", "Paper" or "Scissors"`).toLowerCase();
 }

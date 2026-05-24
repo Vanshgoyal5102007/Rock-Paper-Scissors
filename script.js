@@ -33,15 +33,35 @@ function playRound(humanChoice, computerChoice){
         humanScore++;
     }
     else{
-        console.log("Computer wins!");
         console.log(`You lose! ${computerChoice} beats ${humanChoice}!`);
         computerScore++;
     }
 
 }
 
-let humanSelection = getHumanChoice();
-let computerSelection = getComputerChoice();
+function playGame(){
 
-playRound(humanSelection, computerSelection);
-console.log(`Your score: ${humanScore} | Computer's Score: ${computerScore}`);
+    const humanSelection1 = getHumanChoice();
+    const computerSelection1 = getComputerChoice();
+    playRound(humanSelection1, computerSelection1);
+
+    const humanSelection2 = getHumanChoice();
+    const computerSelection2 = getComputerChoice();
+    playRound(humanSelection2, computerSelection2);
+
+    const humanSelection3 = getHumanChoice();
+    const computerSelection3 = getComputerChoice();
+    playRound(humanSelection3, computerSelection3);
+
+    const humanSelection4 = getHumanChoice();
+    const computerSelection4 = getComputerChoice();
+    playRound(humanSelection4, computerSelection4);
+
+    const humanSelection5 = getHumanChoice();
+    const computerSelection5 = getComputerChoice();
+    playRound(humanSelection5, computerSelection5);
+
+    console.log(`Your score: ${humanScore} | Computer's Score: ${computerScore}`);
+}
+
+playGame();

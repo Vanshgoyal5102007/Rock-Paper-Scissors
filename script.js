@@ -43,6 +43,16 @@ function playRound(humanChoice, computerChoice){
     
     resultDiv.appendChild(result);
 
+    if(humanScore === 5){
+        winner.textContent = `You won!`;
+    }
+    else if(computerScore === 5){
+        winner.textContent = `You lost!`;
+    }
+    else{
+        winner.textContent = ``;
+    }
+
 }
 
 // function playGame(){
@@ -95,5 +105,5 @@ const winner = document.createElement('p');
 const score = document.createElement('p');
 
 body.appendChild(resultDiv);
-
 body.appendChild(score);
+body.appendChild(winner);

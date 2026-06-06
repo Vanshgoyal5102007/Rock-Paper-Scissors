@@ -54,9 +54,6 @@ function playRound(humanChoice, computerChoice){
         winner.textContent = `You lost!`;
         gameOver = true;
     }
-    else{
-        winner.textContent = ``;
-    }
 
 }
 

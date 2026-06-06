@@ -21,8 +21,9 @@ function getHumanChoice(){
 let humanScore = 0;
 let computerScore = 0;
 
+let gameOver = false;
 function playRound(humanChoice, computerChoice){
-
+    if (gameOver) return;
     const result = document.createElement('p');
 
     if (computerChoice == humanChoice){
@@ -45,9 +46,11 @@ function playRound(humanChoice, computerChoice){
 
     if(humanScore === 5){
         winner.textContent = `You won!`;
+        gameOver = true;
     }
     else if(computerScore === 5){
         winner.textContent = `You lost!`;
+        gameOver = true;
     }
     else{
         winner.textContent = ``;

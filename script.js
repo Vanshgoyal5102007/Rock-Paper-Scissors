@@ -14,71 +14,77 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    return prompt(`Enter "Rock", "Paper" or "Scissors"`).toLowerCase();
-}
-
-let humanScore = 0;
-let computerScore = 0;
-
-let gameOver = false;
+const scoreDisplay = document.createElement("p");
+scoreDisplay.classList.add("score-display");
+const resultDiv = document.createElement("div");
 
 function playRound(humanChoice, computerChoice){
-    if (gameOver) return;
-
-    const result = document.createElement('p');
-
+    if(gameState === "off") return;
+    
+    const result = document.createElement("p");
+    
     if (computerChoice == humanChoice){
         result.textContent = "It's a tie!";
     }
     else if((computerChoice == 'rock' && humanChoice == 'paper') || 
             (computerChoice == 'paper' && humanChoice == 'scissors') || 
             (computerChoice == 'scissors' && humanChoice == 'rock')){
+        result.textContent = `You win! ${humanChoice} beats ${computerChoice}!`;
         humanScore++;
-        result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-        }
+    }
     else{
-        computerScore++;
         result.textContent = `You lose! ${computerChoice} beats ${humanChoice}!`;
+        computerScore++;
     }
 
-    score.textContent = `Current Score - You: ${humanScore} Computer: ${computerScore}`;
-    
     resultDiv.appendChild(result);
+    gameContainer.appendChild(scoreDisplay);
+    scoreDisplay.textContent = `Your score: ${humanScore} | Computer's Score: ${computerScore}`;
 
-    if(humanScore === 5){
-        winner.textContent = `You won!`;
-        gameOver = true;
+    if(humanScore == 5){
+        gameState = "off";
+        const gameEndPoints = document.createTextNode(` - You win by ${humanScore - computerScore} points!`);
+        scoreDisplay.appendChild(gameEndPoints);
+        scoreDisplay.style.backgroundColor = "rgb(51, 247, 168)";
+        scoreDisplay.style.border = "none";
     }
-    else if(computerScore === 5){
-        winner.textContent = `You lost!`;
-        gameOver = true;
+    
+    else if(computerScore == 5){
+        gameState = "off";
+        const gameEndPoints = document.createTextNode(` - You lost by ${computerScore - humanScore} points!`);
+        scoreDisplay.appendChild(gameEndPoints);
+        scoreDisplay.style.backgroundColor = "rgb(255, 108, 89)";
+        scoreDisplay.style.border = "none";
     }
-
 }
 
-const rock = document.createElement('button');
-rock.textContent = 'Rock';
-const paper = document.createElement('button');
-paper.textContent = 'Paper';
-const scissors = document.createElement('button');
-scissors.textContent = 'Scissors';
+let humanScore = 0;
+let computerScore = 0;
+//Wether game is running or not
+let gameState = "on";
+//The Game Container
+const gameContainer = document.querySelector(".game-container");
+const buttonContainer = document.querySelector(".button-container");
+//Buttons
 
-const body = document.querySelector('body');
+function createButton(txtContent, bgColor){
+    const button = document.createElement("button");
+    button.classList.add("button");
+    button.textContent = txtContent;
+    button.style.backgroundColor = bgColor;
+    return button;
+}
 
-body.appendChild(rock);
-body.appendChild(paper);
-body.appendChild(scissors);
+const rockButton = createButton("Rock", "grey");
+const paperButton = createButton("Paper", "white");
+const scissorsButton = createButton("Scissors", "orange");
 
-const resultDiv = document.createElement('div');
+buttonContainer.appendChild(rockButton);
+buttonContainer.appendChild(paperButton);
+buttonContainer.appendChild(scissorsButton);
 
-rock.addEventListener('click', () => playRound('rock', getComputerChoice()));
-paper.addEventListener('click', () => playRound('paper', getComputerChoice()));
-scissors.addEventListener('click', () => playRound('scissors', getComputerChoice()));
-
-const winner = document.createElement('p');
-const score = document.createElement('p');
-
-body.appendChild(resultDiv);
-body.appendChild(score);
-body.appendChild(winner);
+gameContainer.appendChild(resultDiv);
+//Event Listeners for buttons
+rockButton.addEventListener("click", () => playRound("rock", getComputerChoice()));
+paperButton.addEventListener("click", () => playRound("paper", getComputerChoice()));
+scissorsButton.addEventListener("click", () => playRound("scissors", getComputerChoice()));

@@ -1,2 +1,2 @@
 # Rock-Paper-Scissors
-Basic JS DOM Manipulation based rock paper scissors game
+Basic web rock paper scissors game
